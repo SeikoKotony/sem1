@@ -1,33 +1,33 @@
 import socket
-from _thread import start_new_thread
+from _thread import start_new_thread 
 
-client= socket.socket()
+client = socket.socket()
 
-client.connect(('192.168.210.163', int(3000)))
+client.connect(('localhost', 3000))
 
 data = client.recv(1024)
-print('code:', data)
-print('message:', data.decode())
+print('Сообщение в бинарном виде',data)
+print('Входящее сообщение',data.decode())
 
-message = 'за карш не скину'
+message = 'ПРИВЕТ СЕРВЕР!'
 data = message.encode()
 client.send(data)
 
 def getMessages():
     while True:
         data = client.recv(1024)
-        print('Input', data.decode())
-        if data.decode() == 'Close!':
+        print('Входящее сообщение',data.decode())
+        if data.decode() =='Закрывай!':
             break
     client.close()
 
-start_new_thread(getMessages, ())    
+start_new_thread(getMessages, ())
 
 while True:
-    message = input('Input your message:')
+    message = input('Введите сообщение: ')
     data = message.encode()
     client.send(data)
-    if message == 'Close!':
+    if message =='Закрывай!':
         break
 
 client.close()

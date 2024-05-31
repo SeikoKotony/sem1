@@ -45,3 +45,17 @@ class Audio_Item():
     
     def __str__(self) -> str:
         return str(self.__dict__)
+
+
+if __name__=='__main__':
+
+    my_audio = Audio_Item("seminar_3/1kHz_44100Hz_16bit_05sec.wav")
+
+
+    plt.plot(my_audio.time_scale,my_audio.osc_data)
+    plt.show()
+
+    plt.plot(my_audio.freqs_scale[0:ceil(my_audio.num_of_samples/2)], my_audio.spectre_data[0:ceil(my_audio.num_of_samples/2)])
+    plt.show()
+
+    pass
